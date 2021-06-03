@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Please, input a letter: K M G, and press enter"
+read letter
+df --output=source,avail --block-size=$letter | grep /dev/ | awk '{sum += $2} END {print sum}'
