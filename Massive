@@ -1,0 +1,10 @@
+#!/bin/bash
+SCRIPT_PATH="./freecut"
+OUTPUT=$("$SCRIPT_PATH")
+read -a array <<< $OUTPUT
+echo ${array[@]}
+sum=0
+for i in "${array[@]}"; do
+    let sum+=$i
+done
+echo $sum
