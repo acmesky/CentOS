@@ -1,4 +1,13 @@
 #!/bin/bash
 echo "Please, input a letter: K M G, and press enter"
-read letter
-df --output=source,avail --block-size=$letter | grep /dev/ | awk '{sum += $2} END {print sum}'
+while read -r -n 1 -s letter; do
+if [[ $letter = [KkMmGg] ]]; then
+   [[ $letter = [KkMmGg] ]] && echo "Available: ($letter)" 
+   && df --output=source,avail --block-size=$letter | grep /dev/ | awk '{sum += $2} END {print sum}' 
+   && echo "Used:"  
+   && df --output=source,used --block-size=$letter | grep /dev/ | awk '{sum += $2} END {print sum}'
+break
+else echo "Unknown commands"
+break
+fi
+done
