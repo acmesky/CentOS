@@ -1,2 +1,0 @@
-#!/bin/bash
-df | grep /dev/ | sed 's/\ \{1,\}/:/g' | cut -d':' -f4
