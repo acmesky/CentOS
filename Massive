@@ -1,10 +1,25 @@
 #!/bin/bash
-SCRIPT_PATH="./freecut"
-OUTPUT=$("$SCRIPT_PATH")
-read -a array <<< $OUTPUT
-echo ${array[@]}
+echo "Please, input a letter: K M G, and press enter"
+while read -r -n 1 -s letter; do
+if [[ $letter = [KkMmGg] ]]; then
+   [[ $letter = [KkMmGg] ]] && echo "Available: ($letter)" &&
+avail=`df --block-size=$letter | grep /dev/ | sed 's/\ \{1,\}/:/g ; s/K//g ; s/M//g ; s/G//g' | cut -d':' -f4`
+read -a array1 <<< $avail
 sum=0
-for i in "${array[@]}"; do
+for i in "${array1[@]}"; do
     let sum+=$i
 done
-echo $sum
+echo $sum &&
+echo "Used:" &&
+used=`df --block-size=$letter | grep /dev/ | sed 's/\ \{1,\}/:/g ; s/K//g ; s/M//g ; s/G//g' | cut -d':' -f3`
+read -a array2 <<< $used
+sum1=0
+for d in "${array2[@]}"; do
+    let sum1+=$d
+done
+echo $sum1 &&
+break
+else echo "Unknown commands"
+break
+fi
+done
