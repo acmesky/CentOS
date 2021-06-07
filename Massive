@@ -2,7 +2,7 @@
 echo "Please, input a letter: K M G, and press enter"
 while read -r -n 1 -s letter; do
 if [[ $letter = [KkMmGg] ]]; then
-   [[ $letter = [KkMmGg] ]] && echo "Available: ($letter)" &&
+   echo "Available: ($letter)" &&
 avail=`df --block-size=$letter | grep /dev/ | sed 's/\ \{1,\}/:/g ; s/K//g ; s/M//g ; s/G//g' | cut -d':' -f4`
 read -a array1 <<< $avail
 sum=0
